@@ -1,6 +1,7 @@
 import { BaseDAO } from "../common/dao/BaseDao";
 import { User } from "./User";
 import { DBConnection } from "../DBConnection";
+import { logger } from "../logger";
 
 var util            = require('util');
 
@@ -22,7 +23,8 @@ export class UserDao extends BaseDAO {
     public read(aToken:string, callback:any) {
         var self = this;
 
-        DBConnection.getConnectionPool().getConnection(function(err:any, connection:any){
+        DBConnection.getConnectionPool().getConnection(function(err:any, connection:any) {
+
             if (err) {
                 callback(self.handleDatabaseError(err));
                 return;

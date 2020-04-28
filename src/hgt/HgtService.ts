@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { BaseService } from "../common/service/BaseService";
 import { Score } from "./Score";
 import { HgtDao } from "./HgtDao";
@@ -30,7 +31,7 @@ export class HgtService extends BaseService {
                 callback(self._handleDAOError(err));
             }
             else {
-                console.log(response);
+                logger.debug('', response);
                 callback(undefined, response);
             }
         });

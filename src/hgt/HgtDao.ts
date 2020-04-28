@@ -1,7 +1,7 @@
+import { logger } from "../logger";
 import { BaseDAO } from "../common/dao/BaseDao";
 import { DBConnection } from "../DBConnection";
 import { Score } from "./Score";
-import { currentId } from "async_hooks";
 
 var util = require('util');
 
@@ -128,7 +128,7 @@ export class HgtDao extends BaseDAO {
                     return values;
                 }, []);
 
-            console.log(HgtDao.INSERT + insertValues);
+            logger.debug(HgtDao.INSERT, insertValues);
 
             connection.query(HgtDao.INSERT + insertValues, function(err:any, result:any){
                 if (err || !result) {

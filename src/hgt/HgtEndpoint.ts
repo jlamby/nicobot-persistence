@@ -1,5 +1,6 @@
 var moment = require("moment");
 
+import { logger } from "../logger";
 import { ScoreResponse } from "./ScoreResponse";
 import { HgtService } from "./HgtService";
 import { Score } from "./Score";
@@ -9,7 +10,7 @@ export class HgtEndpoint {
     private static hgtService: HgtService = new HgtService();
 
     public static index(req: any, res:any) {
-        console.log("[HgtEndpoint] Incoming 'this week' request : %j", req.query);
+        logger.info("[HgtEndpoint] Incoming 'this week' request : %j", req.query);
 
         var now = new Date();
 
@@ -17,7 +18,7 @@ export class HgtEndpoint {
     }
 
     public static byWeek(req:any, res:any){
-        console.log("[HgtEndpoint] Incoming 'weekly' request : %j", req.query);
+        logger.info("[HgtEndpoint] Incoming 'weekly' request : %j", req.query);
 
         HgtEndpoint.retrieveByWeek(res, req.params.channel, req.params.year, req.params.week);
     }
@@ -27,7 +28,7 @@ export class HgtEndpoint {
             var response = new ScoreResponse();
 
             if (err) {
-                console.log("[HgtEndpoint] Errors : %j", err);
+                logger.error("[HgtEndpoint] Errors : %j", err);
                 response.addErrors(err);
             }
             else {
@@ -39,14 +40,14 @@ export class HgtEndpoint {
     }
 
     public static byYear(req:any, res:any) {
-        console.log("[HgtEndpoint] Incoming 'yearly' request : %j", req.query);
+        logger.info("[HgtEndpoint] Incoming 'yearly' request : %j", req.query);
 
 
         HgtEndpoint.hgtService.retrieveYear(req.params.channel, req.params.year, function(err:any, result:any){
             var response = new ScoreResponse();
 
             if (err) {
-                console.log("[HgtEndpoint] Errors : %j", err);
+                logger.error("[HgtEndpoint] Errors : %j", err);
                 response.addErrors(err);
             }
             else {
@@ -58,7 +59,7 @@ export class HgtEndpoint {
     }
 
     public static create(req:any, res:any){
-        console.log("[HgtEndpoint] Incoming 'create' request : %j", req.body);
+        logger.info("[HgtEndpoint] Incoming 'create' request : %j", req.body);
 
         var scores = HgtEndpoint.parseScores(req.body.users, req.params.channel);
 
@@ -66,7 +67,7 @@ export class HgtEndpoint {
             var response = new ScoreResponse();
 
             if (err) {
-                console.log("[HgtEndpoint] Errors : %j", err);
+                logger.error("[HgtEndpoint] Errors : %j", err);
                 response.addErrors(err);
             }
 

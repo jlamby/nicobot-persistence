@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { Link } from "./Link";
 import { Response } from "../common/dto/Response";
 import { LinkService } from "./LinkService";
@@ -8,7 +9,7 @@ export class LinkEndpoint {
     private static linkService: LinkService = new LinkService();
 
     public static index(req:any, res:any) {
-        console.log("[LinkEndpoint] Incoming 'index' request : %j", req.query.link);
+        logger.info("[LinkEndpoint] Incoming 'index' request : %j", req.query.link);
 
         var response = new Response();
 
@@ -23,7 +24,7 @@ export class LinkEndpoint {
 
         LinkEndpoint.linkService.get(link, function(err:any, result:Link){
             if (err) {
-                console.log("[LinkEndpoint] Errors : %j", err);
+                logger.error("[LinkEndpoint] Errors : %j", err);
                 response.addErrors(err);
             }
             else {
@@ -35,7 +36,7 @@ export class LinkEndpoint {
     }
 
     public static create(req:any, res:any) {
-        console.log("[LinkEndpoint] Incoming 'create' request : %j", req.body.link);
+        logger.info("[LinkEndpoint] Incoming 'create' request : %j", req.body.link);
 
         var linkBody = req.body.link;
 
@@ -51,7 +52,7 @@ export class LinkEndpoint {
             var response = new Response();
 
             if (err) {
-                console.log("[LinkEndpoint] Errors : %j", err);
+                logger.error("[LinkEndpoint] Errors : %j", err);
                 response.addError(new ErrorItem("", err.message));
             }
             else {

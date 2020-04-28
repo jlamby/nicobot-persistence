@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { BaseService } from "../common/service/BaseService";
 import { GommetteDao } from "./GommetteDao";
 import { Gommette } from "./Gommette";
@@ -25,7 +26,7 @@ export class GommetteService extends BaseService {
       if (err || !response) {
         callback(self._handleDAOError(err));
       } else {
-        console.log(response);
+        logger.debug('', response);
         callback(undefined, response);
       }
     });
@@ -45,7 +46,7 @@ export class GommetteService extends BaseService {
       if (err || !response) {
         callback(self._handleDAOError(err));
       } else {
-        console.log(response);
+        logger.debug('', response);
         callback(undefined, response);
       }
     });

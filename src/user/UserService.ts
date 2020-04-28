@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { BaseService } from "../common/service/BaseService";
 import { UserDao } from "./UserDao";
 import { ErrorItem } from "../common/model/ErrorItem";
@@ -27,7 +28,7 @@ export class UserService extends BaseService {
                 callback(new ErrorItem("token", "user not found"));
             }
             else {
-                console.log(response);
+                logger.debug('%s', response);
                 callback(undefined, response);
             }
         });

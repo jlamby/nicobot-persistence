@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 import { Config } from "./Config";
 import { Authentication } from "./auth/Authentication";
 import { HgtEndpoint } from "./hgt/HgtEndpoint";
@@ -6,38 +7,44 @@ import { MessageEndpoint } from "./message/MessageEndpoint";
 import { GommetteEndpoint } from "./gommette/GommetteEndpoint";
 
 var express         = require('express');
-var logger          = require('morgan');
+var morgan          = require('morgan');
 var bodyParser      = require('body-parser');
-var expressResource = require('express-resource');
 var compression     = require('compression');
 
-console.log("Server is starting ...");
+logger.info("Server is starting ...");
 
 var app = express();
 
-app.use(logger('tiny'));
+app.use(morgan('combined', { stream : logger.stream }));
 app.use(bodyParser.json());
 app.use(compression());
 
-console.log("Creating routes ...");
+logger.info("Creating routes ...");
 
 app.use(Authentication.authenticateUser);
 
-app.resource('messages', MessageEndpoint);
-app.resource('links', LinkEndpoint);
-app.resource('scores/hgt/:channel', HgtEndpoint);
-app.resource('scores/gommettes', GommetteEndpoint);
+app.get('/messages', MessageEndpoint.index);
+app.post('/messages', MessageEndpoint.create);
+
+app.get('/links', LinkEndpoint.index);
+app.post('/links', LinkEndpoint.create);
+
+app.get('/scores/hgt/:channel', HgtEndpoint.index);
 app.get('/scores/hgt/:channel/:year', HgtEndpoint.byYear);
 app.get('/scores/hgt/:channel/:year/:week', HgtEndpoint.byWeek);
+app.post('/scores/hgt/:channel', HgtEndpoint.create);
+
+app.get('/scores/gommettes', GommetteEndpoint.index);
 app.get('/scores/gommettes/:year', GommetteEndpoint.byYear);
 app.get('/scores/gommettes/:year/:userId', GommetteEndpoint.byYearAndUser);
+app.post('/scores/gommettes', GommetteEndpoint.create);
 
-console.log("Routes : ");
+logger.info("Routes : ");
 for (var r of app._router.stack) {
     if (r.route && r.route.path) {
-        console.log(r.route.path)
+        logger.info(r.route.path)
     }
 }
 
 app.listen(Config.SERVER_PORT);
-console.log("Node server listening on " + Config.SERVER_PORT);
+logger.info("Node server listening on " + Config.SERVER_PORT);

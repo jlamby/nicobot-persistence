@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { BaseService } from "../common/service/BaseService";
 import { Link } from "./Link";
 import { LinkDao } from "./LinkDao";
@@ -25,7 +26,7 @@ export class LinkService extends BaseService {
                 callback(self._handleDAOError(err));
             }
             else {
-                console.log(response);
+                logger.debug('', response);
                 callback(undefined, response);
             }
         });
@@ -44,7 +45,7 @@ export class LinkService extends BaseService {
                         callback(self._handleDAOError(err));
                     }
                     else {
-                        console.log(response);
+                        logger.debug('', response);
                         callback(undefined, response);
                     }
                 });
@@ -55,7 +56,7 @@ export class LinkService extends BaseService {
                         callback(self._handleDAOError(err));
                     }
                     else {
-                        console.log(response);
+                        logger.debug('', response);
                         callback(undefined, response);
                     }
                 });

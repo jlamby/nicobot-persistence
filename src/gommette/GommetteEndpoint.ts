@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { GommetteService } from "./GommetteService";
 import { GommetteScoreResponse } from "./GommetteScoreResponse";
 import { Gommette } from "./Gommette";
@@ -7,7 +8,7 @@ export class GommetteEndpoint {
   private static gommetteService: GommetteService = new GommetteService();
 
   public static index(req: any, res: any) {
-    console.log("[GommetteEndpoint] Incoming 'this year' request: %j", req.query);
+    logger.info("[GommetteEndpoint] Incoming 'this year' request: %j", req.query);
 
     var now = new Date();
 
@@ -15,7 +16,7 @@ export class GommetteEndpoint {
   }
 
    public static byYear(req:any, res:any) {
-    console.log("[GommetteEndpoint] Incoming 'yearly' request: %j", req.query);
+    logger.info("[GommetteEndpoint] Incoming 'yearly' request: %j", req.query);
 
     GommetteEndpoint.retrieveByYear(res, req.params.year);
   }
@@ -25,7 +26,7 @@ export class GommetteEndpoint {
      var response = new GommetteScoreResponse();
 
      if(err) {
-       console.log("[GommetteEndpoint] Errors: %j", err);
+       logger.error("[GommetteEndpoint] Errors: %j", err);
        response.addErrors(err);
      } else {
        response.setScores(result);
@@ -36,7 +37,7 @@ export class GommetteEndpoint {
   }
 
   public static byYearAndUser(req: any, res:any) {
-    console.log("[GommetteEndpoint] Incoming 'yearly user' request: %j", req.query);
+    logger.info("[GommetteEndpoint] Incoming 'yearly user' request: %j", req.query);
 
     GommetteEndpoint.retrieveByYearAndUserId(res, req.params.year, req.params.userId);
   }
@@ -46,7 +47,7 @@ export class GommetteEndpoint {
      var response = new GommetteScoreResponse();
 
      if(err) {
-       console.log("[GommetteEndpoint] Errors: %j", err);
+       logger.error("[GommetteEndpoint] Errors: %j", err);
        response.addErrors(err);
      } else {
        response.setScores(result);
@@ -57,7 +58,7 @@ export class GommetteEndpoint {
   }
 
   public static create(req: any, res:any) {
-    console.log("[GommetteEndpoint] Incoming 'create' request: %j", req.body);
+    logger.info("[GommetteEndpoint] Incoming 'create' request: %j", req.body);
 
     var gommette = GommetteEndpoint.parseGommette(req.body.gommette);
 
@@ -65,7 +66,7 @@ export class GommetteEndpoint {
       var response = new GommetteScoreResponse();
 
       if (err) {
-        console.log("[GommetteEndpoint] Errors: %j", err);
+        logger.error("[GommetteEndpoint] Errors: %j", err);
         response.addErrors(err);
       }
 
