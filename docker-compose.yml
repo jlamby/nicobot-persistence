@@ -1,7 +1,7 @@
 version: '3'
 services:
-  mysql:
-    image: "mysql/mysql-server:5.7"
+  db-api:
+    image: "mariadb:bionic"
     ports:
       - "9306:3306"
     env_file: mysql.env
@@ -13,7 +13,7 @@ services:
       - "9080:8080"
     env_file: api.env
     links:
-      - mysql
+      - db-api
     volumes:
       - ./node_modules:/usr/src/app/node_modules:cached
       - ./src:/usr/src/app/src:cached

@@ -54,3 +54,7 @@ ENGINE=InnoDB;
 
 
 INSERT INTO user (name, token) VALUES ('development', 'dev');
+INSERT INTO message (username, message, channel, timestamp) VALUES ('uname', 'message #1 éà$<>{}[]()', 'general', 1);
+INSERT INTO message (username, message, channel, timestamp) VALUES ('uname', 'message #2', 'general', 2);
+INSERT INTO link (link, count) VALUES ('https://www.google.be', 1);
+INSERT INTO link (link, count) VALUES ('https://www.google.com', 2);
