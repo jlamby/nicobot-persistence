@@ -1,3 +1,4 @@
+import { logger } from "./logger";
 import { Config } from "./Config";
 
 var mysql 	= require('mysql');
@@ -7,7 +8,7 @@ export class DBConnection {
 
     public static getConnectionPool() : any {
         if (DBConnection.connectionPool == undefined) {
-            console.log("[DBConnection] Connection pool was undefined ... creating a new pool");
+            logger.info("[DBConnection] Connection pool was undefined ... creating a new pool");
 
             DBConnection.createPool();
         }

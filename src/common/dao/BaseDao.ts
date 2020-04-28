@@ -1,6 +1,8 @@
+import { logger } from "../../logger";
+
 export class BaseDAO {
     public handleDatabaseError(err: any) : object {
-        console.log("[BaseDAO] Error from database : " + err);
+        logger.error("[BaseDAO] Error from database : " + err);
 
         return {
             layer: 'database',

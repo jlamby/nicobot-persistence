@@ -1,33 +1,36 @@
 {
   "name": "nicobot_persistence",
   "description": "Module de persistence de nicobot",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "compression": "^1.7.3",
-    "express": "^4.16.4",
-    "express-resource": "1.0.0",
-    "moment": "^2.22.2",
-    "morgan": "^1.9.1",
-    "mysql": "^2.16.0"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "moment": "^2.24.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.2.1"
   },
   "scripts": {
-    "prepare": "tsc",
-    "start": "node lib/main.js",
+    "start": "node target/main.js",
     "startDev": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/main.ts"
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/main.ts",
+    "build:install": "npm install",
+    "build:prepare": "tsc",
+    "build:cleanDeps": "npm prune --production",
+    "build:bundle": "npm run build:install | npm run build:prepare | npm run build:cleanDeps"
   },
-  "main": "lib/main.js",
-  "types": "lib/main.d.js",
+  "main": "target/main.js",
+  "types": "target/main.d.js",
   "directories": {
     "test": "test"
   },
   "devDependencies": {
-    "@types/node": "^8.0.57",
-    "nodemon": "^1.18.7",
-    "ts-node": "^3.3.0",
-    "typescript": "^2.6.2"
+    "@types/node": "^13.13.4",
+    "nodemon": "^2.0.3",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",

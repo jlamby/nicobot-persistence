@@ -1,5 +1,6 @@
 var util = require('util');
 
+import { logger } from "../logger";
 import { BaseDAO } from "../common/dao/BaseDao";
 import { Message } from "./Message";
 import { DBConnection } from "../DBConnection";
@@ -40,7 +41,7 @@ export class MessageDao extends BaseDAO {
                 connection.escape(limit)
             );
 
-            console.log(queryString);
+            logger.debug(queryString);
 
             connection.query(queryString, function(err:any, result:any) {
                 if (err || !result) {
@@ -82,7 +83,7 @@ export class MessageDao extends BaseDAO {
                 connection.escape(limit)
             );
 
-            console.log(queryString);
+            logger.debug(queryString);
 
             connection.query(queryString, function(err:any, result:any) {
                 if (err || !result) {
@@ -127,7 +128,7 @@ export class MessageDao extends BaseDAO {
                 queryParam
             );
 
-            console.log(queryString);
+            logger.debug(queryString);
 
             connection.query(queryString, function(err:any, result:any) {
                 if (err || !result) {
@@ -170,7 +171,7 @@ export class MessageDao extends BaseDAO {
                 return values;
             }, []);
 
-            console.log(MessageDao.INSERT + insertValues);
+            logger.debug(MessageDao.INSERT, insertValues);
 
             connection.query(MessageDao.INSERT + insertValues, function(err:any, result:any){
                 if (err || !result) {

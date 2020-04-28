@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { MessageService } from "./MessageService";
 import { MessageResponse } from "./MessageResponse";
 import { Paging } from "../common/model/Paging";
@@ -19,7 +20,7 @@ export class MessageEndpoint {
 
         MessageEndpoint.messageService.get(startDate, start, limit, function(err:any, result:any){
             if (err) {
-                console.log("[MessageEndpoint] Errors : %j", err);
+                logger.error("[MessageEndpoint] Errors : %j", err);
                 response.addErrors(err);
                 res.json(response);
             }
@@ -28,7 +29,7 @@ export class MessageEndpoint {
 
                 MessageEndpoint.messageService.size(startDate, function(err:any, result:any){
                     if (err) {
-                        console.log("[MessageEndpoint] Errors : %j", err);
+                        logger.error("[MessageEndpoint] Errors : %j", err);
                         response.addErrors(err);
                     }
                     else {
@@ -57,7 +58,7 @@ export class MessageEndpoint {
     }
 
     public static create = function(req:any, res:any) {
-        console.log("[MessageEndpoint] Incoming 'create' request : %j", req.body);
+        logger.info("[MessageEndpoint] Incoming 'create' request : %j", req.body);
 
         var msgBody = req.body.messages;
 
@@ -73,7 +74,7 @@ export class MessageEndpoint {
             var response = new Response();
 
             if (err) {
-                console.log("[MessageEndpoint] Errors : %j", err);
+                logger.error("[MessageEndpoint] Errors : %j", err);
                 response.addErrors(err);
             }
             else {

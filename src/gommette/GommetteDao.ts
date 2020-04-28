@@ -1,3 +1,4 @@
+import { logger } from "../logger";
 import { BaseDAO } from "../common/dao/BaseDao";
 import { DBConnection } from "../DBConnection";
 import { Gommette } from "./Gommette";
@@ -46,7 +47,7 @@ export class GommetteDao extends BaseDAO {
         connection.escape(userId)
       );
 
-      console.log(queryString);
+      logger.debug(queryString);
 
       connection.query(queryString, function(err:any, result:any) {
         if (err || !result) {
@@ -82,7 +83,7 @@ export class GommetteDao extends BaseDAO {
         connection.escape(year)
       );
 
-      console.log(queryString);
+      logger.debug(queryString);
 
       connection.query(queryString, function(err:any, result:any) {
         if (err || !result) {
@@ -131,7 +132,7 @@ export class GommetteDao extends BaseDAO {
         connection.escape(newGommette.isValid())
       )
 
-      console.log(insertValue);
+      logger.debug(insertValue);
 
       connection.query(insertValue, function(err:any, result:any){
         if (err || !result) {

@@ -5,4 +5,6 @@ export class Config {
     public static DB_PASSWORD  = process.env.DB_PASSWORD;
     public static DB_NAME      = process.env.DB_NAME;
     public static SERVER_PORT  = process.env.SERVER_PORT;
+
+    public static LOG_PATH     = process.env.LOG_PATH;
 }
