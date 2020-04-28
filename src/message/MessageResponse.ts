@@ -2,13 +2,12 @@ import { Message } from "./Message";
 import { Response } from "../common/dto/Response";
 import { Paging } from "../common/model/Paging";
 import { MessageDto } from "./MessageDto";
-import { MessageDao } from "./MessageDao";
 import { ErrorItem } from "../common/model/ErrorItem";
 
 export class MessageResponse extends Response<Array<Message>>{
 
-    private messages:Array<Message>;
-    private paging:Paging;
+    private messages !: Array<Message>;
+    private paging !: Paging;
 
     constructor() {
         super();

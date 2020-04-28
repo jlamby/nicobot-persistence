@@ -2,8 +2,8 @@ import { Error } from "../model/Error";
 import { ErrorItem } from "../model/ErrorItem";
 
 export class Response<T> {
-    private error : Error;
-    private content : T;
+    private error !: Error;
+    private content !: T;
 
     getError() { return this.error; }
     setError(error: Error) { this.error = error; }
